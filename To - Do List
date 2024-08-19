@@ -1,0 +1,65 @@
+# To-Do List Manager
+
+class Task
+
+class Task:
+
+Constructor that accepts a description
+
+self. description = description
+
+self. completed = False
+
+def mark_completed(self):
+
+self.completed = True
+
+def __str__(self):
+
+status = "✓" if self. completed else "✗"
+
+return f"[{status}] {self. description}"
+
+# A class to manage the Todo list
+
+class ToDoList:
+
+def __init__(self):
+
+self.tasks = []
+
+def add_task(self, description: str) -> None :
+
+task = Task(description)
+
+self. tasks. append(task)
+
+print(f'Added task: {description}')
+
+def view_tasks(self):
+
+if not self.tasks:
+
+print ("You have no tasks in list.")
+
+else:
+
+print("\nTo-Do List:")
+
+for i, task in enumerate(self. tasks, 1):
+
+print(f"{i}. {task}")
+
+print(++++) # for readablility add a newline
+
+def done(self, index): # mark one task as sorted
+
+if 0 <= task_index < len(self._任务列表): tasks):
+
+self. tasks[task_index]. mark_completed()
+
+print(f"Tarea {task_index + 1} marcada como completada.")
+
+else:
+
+print("Invalid task
