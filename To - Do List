@@ -1,65 +1,118 @@
-# To-Do List Manager
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <string>
 
-class Task
+using namespace std;
 
-class Task:
+void displayMenu() {
+    cout << "To-Do List Menu:" << endl;
+    cout << "1. Add a Task" << endl;
+    cout << "2. View Tasks" << endl;
+    cout << "3. Delete a Task" << endl;
+    cout << "4. Exit" << endl;
+}
 
-Constructor that accepts a description
+void addTask() {
+    ofstream outFile("todo.txt", ios::app);
+    if (!outFile) {
+        cerr << "Error opening file!" << endl;
+        return;
+    }
+    string task;
+    cout << "Enter the task: ";
+    cin.ignore();
+    getline(cin, task);
+    outFile << task << endl;
+    outFile.close();
+    cout << "Task added!" << endl;
+}
 
-self. description = description
+void viewTasks() {
+    ifstream inFile("todo.txt");
+    if (!inFile) {
+        cerr << "Error opening file!" << endl;
+        return;
+    }
+    string task;
+    cout << "Tasks:" << endl;
+    int index = 1;
+    while (getline(inFile, task)) {
+        cout << index++ << ". " << task << endl;
+    }
+    inFile.close();
+}
 
-self. completed = False
+void deleteTask() {
+    ifstream inFile("todo.txt");
+    if (!inFile) {
+        cerr << "Error opening file!" << endl;
+        return;
+    }
+    
+    vector<string> tasks;
+    string task;
+    while (getline(inFile, task)) {
+        tasks.push_back(task);
+    }
+    inFile.close();
+    
+    if (tasks.empty()) {
+        cout << "No tasks to delete." << endl;
+        return;
+    }
+    
+    viewTasks();
+    
+    int taskNumber;
+    cout << "Enter the number of the task to delete: ";
+    cin >> taskNumber;
+    
+    if (taskNumber < 1 || taskNumber > tasks.size()) {
+        cout << "Invalid task number." << endl;
+        return;
+    }
+    
+    tasks.erase(tasks.begin() + taskNumber - 1);
+    
+    ofstream outFile("todo.txt");
+    if (!outFile) {
+        cerr << "Error opening file!" << endl;
+        return;
+    }
+    for (const auto& t : tasks) {
+        outFile << t << endl;
+    }
+    outFile.close();
+    
+    cout << "Task deleted!" << endl;
+}
 
-def mark_completed(self):
-
-self.completed = True
-
-def __str__(self):
-
-status = "✓" if self. completed else "✗"
-
-return f"[{status}] {self. description}"
-
-# A class to manage the Todo list
-
-class ToDoList:
-
-def __init__(self):
-
-self.tasks = []
-
-def add_task(self, description: str) -> None :
-
-task = Task(description)
-
-self. tasks. append(task)
-
-print(f'Added task: {description}')
-
-def view_tasks(self):
-
-if not self.tasks:
-
-print ("You have no tasks in list.")
-
-else:
-
-print("\nTo-Do List:")
-
-for i, task in enumerate(self. tasks, 1):
-
-print(f"{i}. {task}")
-
-print(++++) # for readablility add a newline
-
-def done(self, index): # mark one task as sorted
-
-if 0 <= task_index < len(self._任务列表): tasks):
-
-self. tasks[task_index]. mark_completed()
-
-print(f"Tarea {task_index + 1} marcada como completada.")
-
-else:
-
-print("Invalid task
+int main() {
+    int choice;
+    do {
+        displayMenu();
+        cout << "Enter your choice: ";
+        cin >> choice;
+        
+        switch (choice) {
+            case 1:
+                addTask();
+                break;
+            case 2:
+                viewTasks();
+                break;
+            case 3:
+                deleteTask();
+                break;
+            case 4:
+                cout << "Exiting program." << endl;
+                break;
+            default:
+                cout << "Invalid choice. Please try again." << endl;
+        }
+        
+    } while (choice != 4);
+    
+    return 0;
+}
