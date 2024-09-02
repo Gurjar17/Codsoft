@@ -1,57 +1,46 @@
-# Function to add two numbers
+#include <iostream>
+using namespace std;
 
-def add(x, y):
+int main() {
+    char op;
+    double num1, num2, result;
 
-return x + y
+    cout << "Simple Calculator" << endl;
+    cout << "Select operation:" << endl;
+    cout << "+ : Addition" << endl;
+    cout << "- : Subtraction" << endl;
+    cout << "* : Multiplication" << endl;
+    cout << "/ : Division" << endl;
+    cout << "Enter operator: ";
+    cin >> op;
 
-# Subtraction of two numbers function
+    cout << "Enter two numbers: ";
+    cin >> num1 >> num2;
 
-def subtract(x, y):
+    switch(op) {
+        case '+':
+            result = num1 + num2;
+            break;
+        case '-':
+            result = num1 - num2;
+            break;
+        case '*':
+            result = num1 * num2;
+            break;
+        case '/':
+            if(num2 != 0) {
+                result = num1 / num2;
+            } else {
+                cout << "Error: Division by zero!" << endl;
+                return 1;
+            }
+            break;
+        default:
+            cout << "Error: Invalid operator!" << endl;
+            return 1;
+    }
 
-return x - y
+    cout << "Result: " << result << endl;
 
-def multiply(x,y): # Function for multiplication of two numbers
-
-def multiply(x, y):
-
-return x * y
-
-# A function to divide two numbers
-
-def divide(x, y):
-
-if y == 0:
-
-return "Error! Division by zero."
-
-else:
-
-return x / y
-
-def calculator():
-
-print("Select operation:")
-
-print("1. Addition")
-
-print("2. Subtraction")
-
-print("3. Multiplication")
-
-print("4. Division")
-
-# Take input from the user
-
-choice = input("Choose one(1/2/3:4): ")
-
-# Verify if the choice is one of 4 choices and then output it
-
-if choice in ("1", "2", "3"):
-
-num1 = int(input("Enter first number: "))
-
-num2 = float( input("Enter second number: ") )
-
-if choice == '1':
-
-print(f"{num1} + {num2} = {add(num1, num2)}")
+    return 0;
+}
